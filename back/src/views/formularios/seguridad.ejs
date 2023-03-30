@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gestión de Torre</title>
+
+    <link rel="shortcut icon" href="/img/logo/logo.svg" style="border-radius: 100" />
+
+    <!--=====================================
+	PLUGINS DE CSS
+	======================================-->
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&display=swap" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Kalam&family=Roboto&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <script src="https://kit.fontawesome.com/22284035c9.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/css/nav.css" />
+    <link rel="stylesheet" href="/css/rrhh.css" />
+    <link rel="stylesheet" href="/css/altadeusuario.css" />
+    <link rel="stylesheet" href="/css/reloj.css" />
+
+</head>
+
+<body onload="startTime()">
+    <%- include('../partial/navSeguridad') %>
+
+    <%- include('../partial/reloj') %>
+    <br>
+    <h2 style="text-align: center">REGISTRO DE UN NUEVO INGRESO</h2>
+    <% if(usuario.estado_password===0) { %>
+    <a href="">
+        <h3 style="
+          color: red;
+          background-color: rgba(188, 187, 187, 0.721);
+          border-radius: 10px;
+          width: 100%;
+          text-decoration: none;
+        ">
+            Te recordamos <%- usuario.nombre %> que por políticas de seguridad debes
+            de cambiar la contraseña predeterminada que generó recursos humanos
+            antes de continuar
+        </h3>
+    </a>
+    <% } else { %>
+    <h6 style="text-align: center; color: red">
+        * Le recordamos que todos los campos son obligatorio
+    </h6>
+    <br>
+
+    <div class="container">
+        <form action="/ingreso/sector/seguridad/:id/registroInforme" method="POST">
+            <label for="fecha">Fecha de ingreso:</label>
+            <input type="date" id="fecha" name="fecha" <%=locals.errors && errors.fecha ? 'is-invalid' :
+                            null %>" value="<%= locals.oldData ? oldData.fecha : null %> " required>
+            <% if (locals.errors && errors.fecha) { %>
+            <div class="text-danger msg">
+                <%= errors.fecha.msg %>
+            </div>
+            <br>
+            <% } %>
+
+            <label for="hora">Hora de ingreso:</label>
+            <input type="time" id="hora" name="hora" <%=locals.errors && errors.hora
+                                        ? 'is-invalid' : null %>" value="<%= locals.oldData ? oldData.hora : null %>"
+                required> <% if (locals.errors && errors.hora) { %>
+            <div class="text-danger msg">
+                <%= errors.hora.msg %>
+            </div>
+
+            <br>
+            <% } %>
+            <label for="interno">Interno</label>
+            <input type="number" id="interno" name="interno"
+                <%=locals.errors && errors.interno ? 'is-invalid' : null %>"
+                value="<%= locals.oldData ? oldData.interno : null %> "> <% if (locals.errors && errors.interno) { %>
+            <div class="text-danger msg">
+                <%= errors.interno.msg %>
+            </div>
+            <br>
+            <% } %>
+            <br>
+            <br>
+            <label for="empresa">Empresa: </label>
+            <select id="empresa" name="empresa" <%=locals.errors && errors.empresa ? 'is-invalid' : null %>">
+                <option value="" disabled selected> Seleccionar </option>
+                <% empresas.forEach(empresas=> { %>
+                <option value="<%= empresas.id %>">
+                    <%= empresas.siglas %> - <%= empresas.empresa %>
+                </option>
+                <% }) %>
+            </select>
+            <label for="servicio">Tipo de servicio: </label>
+            <select id="servicio" name="servicio" <%=locals.errors && errors.servicio ? 'is-invalid' : null %>">
+                <option value="" disabled selected> Seleccionar </option>
+                <% servicio.forEach(servicio=> { %>
+                <option value="<%= servicio.id %>">
+                    <%= servicio.tipo_servicio %> - Sigla: <%= servicio.siglas %>
+                </option>
+                <% }) %>
+            </select>
+
+            <label for="estado">Estado: </label>
+            <select id="estado" name="estado" <%=locals.errors && errors.estado ? 'is-invalid' : null %>">
+                <option value="" disabled selected> Seleccionar </option>
+                <option value="2">Ingresando</option>
+                <option value="3">Sin servicio de plataforma</option>
+            </select>
+
+            <label for="destino">Destino / Servicio: </label>
+            <input type="text" id="destino" name="destino" placeholder='En el caso de ser un servicio externo, debe de colocar el motivo de ingreso. Ejemplo: "Carga combustible"'>
+
+            <input type="number" id="usuario" name="usuario" value="<%= usuario.id %>" hidden>
+            <br>
+            <button type="submit">Registrar Ingreso</button>
+        </form>
+    </div>
+    <% } %>
+    <script src="/js/relojDigital.js"></script>
+    
+</body>
+
+</html>

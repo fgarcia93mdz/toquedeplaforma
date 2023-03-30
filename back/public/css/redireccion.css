@@ -1,0 +1,28 @@
+body {
+  background-image: url(../img/fotosTerminal/terminal-front.jpg);
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 70% !important; 
+  font-family: "Bangers", cursive !important;
+
+}
+
+.title {
+ margin-bottom: 1rem;
+ font-size: 3.5em;
+ font-weight: 500;
+ color: #000000;
+ -webkit-text-stroke: 1px rgb(255, 255, 255);
+
+}
+
+
+
+.container{
+
+  position: relative;
+  top: 740px;
+   background-color: rgba(255, 253, 253, 0.338);
+   border-radius: 100px
+}

@@ -1,0 +1,20 @@
+nav{
+    display: flex;
+    align-items: center;
+    background-color: white;
+}
+
+ul{
+    display: flex;
+}
+
+ul li{
+    margin: 20px;
+    list-style: none;
+}
+
+ul li a{
+    text-decoration: none;
+    color: rgba(28, 104, 192, 1);
+    font-weight: 700;
+}

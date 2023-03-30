@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html class="html" lang="en">
+
+<head>
+  <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Nuevo Usuario</title>
+
+  <link rel="shortcut icon" href="/img/logo/logo.svg" style="border-radius: 100;" />
+
+
+  <!--=====================================
+	PLUGINS DE CSS
+	======================================-->
+
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bangers&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Kalam&family=Roboto&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://kit.fontawesome.com/22284035c9.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="/css/nav.css">
+  <link rel="stylesheet" href="/css/rrhh.css">
+  <link rel="stylesheet" href="/css/altadeusuario.css">
+</head>
+
+<body>
+
+  <% if (usuario.roles_id === 4 ) { %>
+    <%- include('../partial/navSeguridad') %>
+      <% } else if (usuario.roles_id === 2) { %>
+        <%- include('../partial/navRrhh') %>
+          <% } else if (usuario.roles_id === 3) { %>
+        <%- include('../partial/navContContraseña') %>
+          <% }%>
+              <br><br><br><br>
+              <div class="container">
+                <form action='/ingreso/sector/<%- usuario.id %>/cambioDeClave' method="POST">
+                  <label for="nuevaClave">Antigua contraseña</label>
+                  <input type="text" id="password" name="password"
+                    placeholder="Si es su primer cambio de contraseña la predeterminada es 123$">
+                  <label for="nuevaClave">Nueva contraseña</label>
+                  <input type="text" id="nuevaClave" name="nuevaClave" required>
+                  <button type="submit">
+                    Cambiar Contraseña
+                  </button>
+                </form>
+              </div>
+
+
+              <script src="/js/nav.js"></script>
+</body>
+
+</html>

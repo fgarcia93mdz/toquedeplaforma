@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gestión de Informes</title>
+
+    <link rel="shortcut icon" href="/img/logo/logo.svg" style="border-radius: 100" />
+
+    <!--=====================================
+	PLUGINS DE CSS
+	======================================-->
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&display=swap" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Kalam&family=Roboto&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <script src="https://kit.fontawesome.com/22284035c9.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/css/nav.css" />
+    <link rel="stylesheet" href="/css/rrhh.css" />
+    <link rel="stylesheet" href="/css/altadeusuario.css" />
+    <link rel="stylesheet" href="/css/reloj.css" />
+
+</head>
+
+<body onload="startTime()">
+    <%- include('../partial/navSeguridad') %>
+
+    <%- include('../partial/reloj') %>
+    <br>
+
+    <% if(usuario.estado_password===0) { %>
+    <a href="">
+        <h3 style="
+          color: red;
+          background-color: rgba(188, 187, 187, 0.721);
+          border-radius: 10px;
+          width: 100%;
+          text-decoration: none;
+        ">
+            Te recordamos <%- usuario.nombre %> que por políticas de seguridad debes
+            de cambiar la contraseña predeterminada que generó recursos humanos
+            antes de continuar
+        </h3>
+    </a>
+    <% } else { %>
+    <h2 style="text-align: center">MODIFICACION DEL REGISTRO DE INGRESO Nº <%- ingresoId  %> </h2>
+    </h6>
+    <br>
+
+    <div class="container">
+        <form action="/ingreso/informes/<%- ingresoId %>/modificarIngreso" method="POST">
+            <% ingresos.forEach(ingresos=> { %>
+            <label for="fecha">Fecha de ingreso: <%= ingresos.fecha_ingreso %></label>
+            <br>
+            <label for="hora">Hora de ingreso: <%= ingresos.hora_ingreso %></label>
+            <br>
+            <label for="interno">Interno: <%= ingresos.interno %></label>
+            <br>
+            <label for="empresa">Empresa: <%- ingresos.registro_empresa.empresa %></label>
+            <br>
+            <label for="servicio">Tipo de servicio: <%- ingresos.registro_servicio.tipo_servicio %> /
+                <%- ingresos.registro_servicio.siglas %> </label>
+            <br>
+            <label for="estado">Estado: </label>
+            <select id="estado" name="estado">
+                <% estado.forEach(estado=> { %>
+                <option value="<%= estado.id %>"
+                    <% if (ingresos.registro_estado.id == estado.id) { %>
+                        <%= 'selected' %>
+                            <% }; %>><%= estado.tipo %>
+                </option>
+                <% }) %>
+            </select>
+            <label for="plataforma">Plataforma: </label>
+            <select id="plataforma" name="plataforma">
+                <% plataforma.forEach(plataforma=> { %>
+                <option value="<%= plataforma.id %>"
+                    <% if (ingresos.registro_plataforma.id == plataforma.id) { %>
+                        <%= 'selected' %>
+                            <% }; %>><%= plataforma.plataforma %>
+                </option>
+                <% }) %>
+            </select>
+            <label for="destino">Destino: </label>
+            <input type="text" id="destino" name="destino" value="<%- ingresos.destino %>" required>
+
+            <input type="number" id="usuario" name="usuario" value="<%= usuario.id %>" hidden>
+            <br>
+            <% }) %>
+            <label for="fecha">Fecha de egreso:</label>
+            <input type="date" id="fecha" name="fecha_salida" required>
+
+            <label for="hora">Hora de egreso:</label>
+            <input type="time" id="hora" name="hora_salida" required>
+
+            <button type="submit">Modificar Ingreso</button>
+
+        </form>
+    </div>
+    <% } %>
+    <script src="/js/relojDigital.js"></script>
+
+</body>
+
+</html>

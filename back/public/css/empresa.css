@@ -1,0 +1,37 @@
+*{
+    margin: 0;
+    box-sizing: border-box;
+}
+
+main{
+    margin: 20px;
+}
+
+.formulario{
+    background-color: rgb(18, 18, 107);
+    color: white;
+    padding: 50px;
+    border-radius: 20px;
+    max-width: fit-content;
+    margin: 100px auto;
+}
+input{
+    border-radius: 5px;
+    margin: 20px;
+}
+
+.enviar{
+    padding: 10px;
+    border-radius: 5px;
+    background-color: rgb(45, 80, 255);
+    color: white;
+}
+
+.enviar:hover{
+    background-color: rgb(60, 231, 171);
+}
+
+.button{
+    text-align: center;
+    padding-top: 20px;
+}

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="/css/nav.css" />
+    <link rel="stylesheet" href="/css/empresa.css" />
+
+</head>
+<body>
+    <header>
+      <%- include('../partial/navContAltaEmpresa') %>  
+    </header>
+
+    <main>
+    <div class="formulario">
+      <h1>Añadir nueva empresa</h1>
+      <form action="" method="POST" enctype="multipart/form-data">
+        <div>
+            <label for="">Empresa:</label>
+            <input type="text">
+        </div>
+
+        <div>
+            <label for="">Siglas:</label>
+            <input type="text">
+        </div>
+
+        <div>
+            <label for="">CUIT:</label>
+            <input type="text">
+        </div>
+
+        <div>
+            <label for="">Imagen:</label>
+            <input type="file">
+        </div>        
+
+        <div class="button">
+            <button type="submit" class="enviar">AÑADIR</button>
+        </div> 
+      </form>
+    </div>
+    </main>
+
+
+
+</body>
+</html>

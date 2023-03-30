@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html class="html" lang="en">
+
+<head>
+  <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Gestión de ingresos</title>
+
+  <link rel="shortcut icon" href="/img/logo/logo.svg" style="border-radius: 100;" />
+
+
+  <!--=====================================
+	PLUGINS DE CSS
+	======================================-->
+
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bangers&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Kalam&family=Roboto&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://kit.fontawesome.com/22284035c9.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="/css/nav.css">
+  <link rel="stylesheet" href="/css/rrhh.css">
+</head>
+
+<body>
+
+  <%- include('../partial/navSeguridadListado') %>
+  <br>
+
+  <h2 style="text-align: center">LISTADO DE INGRESOS</h2>
+  <% if(usuario.estado_password===0) { %>
+  <a href="/ingreso/sector/<%- usuario.id %>/cambiarClave">
+    <h3
+      style="color: red; background-color:rgba(188, 187, 187, 0.721); border-radius: 10px; width: 100%; text-decoration:none">
+      Te recordamos <%- usuario.nombre %> que por políticas de seguridad debes de cambiar la contraseña
+      predeterminada que generó recursos humanos antes de continuar </h3>
+  </a>
+  <% } else { %>
+  <br>
+  <table>
+    
+    <tr>
+      <th style="text-align:center">Fecha Ingreso</th>
+      <th style="text-align:center">Hora Ingreso</th>
+      <th style="text-align:center">Interno</th>
+      <th style="text-align:center">Empresa</th>
+      <th style="text-align:center">Tipo de Servicio</th>
+      <th style="text-align:center">Destino / Servicio</th>
+      <th style="text-align:center">Estado</th>
+      <th style="text-align:center">Hora Salida</th>
+    </tr>
+    <% ingresos.forEach(ingresos => { %>
+      <% if(ingresos.estado_id != 1) {%> 
+    <tr>
+      <td style="text-align: center">
+        <%- ingresos.fecha_ingreso %>
+      </td>
+      <td style="text-align: center">
+        <%- ingresos.hora_ingreso %>
+      </td>
+      <td style="text-align: center">
+        <%- ingresos.interno %>
+      </td>
+      <td style="text-align: center">
+        <%- ingresos.registro_empresa.empresa %>
+      </td>
+      <td style="text-align: center">
+        <%- ingresos.registro_servicio.tipo_servicio %>
+      </td>
+      <td style="text-align: center">
+        <%- ingresos.destino %>
+      </td>
+      <td style="text-align: center">
+        <%- ingresos.registro_estado.tipo %>
+      </td>
+      <td style="text-align: center">
+        <%- ingresos.hora_salida %>
+      </td>
+    </tr>
+    <% } %>
+    <% }) %>
+
+  </table>
+<% } %> 
+  <script src="/js/nav.js"></script>
+</body>
+
+</html>

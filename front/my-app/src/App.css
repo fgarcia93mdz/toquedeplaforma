@@ -1,0 +1,28 @@
+body {
+  margin: auto;
+  font-family: 'Poppins', sans-serif;
+  background: #f5f5f5;
+
+}
+
+/* h1 {
+  margin: 10vh 0 0 10vw;
+} */
+
+.App {
+  /* padding-left: 10vw; */
+  /* padding-top: 10vh; */
+  font-weight: bold;
+  font-size: 1.5rem;
+  background: #f5f5f5;
+}
+
+label {
+  font-size: 1rem;
+  font-weight: normal;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
